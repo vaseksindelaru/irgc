@@ -10,7 +10,7 @@ const Home = () => {
     // Solicitar la URL del gráfico al backend Flask
     const fetchImage = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/plot.png', { responseType: 'blob' });
+        const response = await axios.get('http://127.0.0.1:5000/plot.png', { responseType: 'blob' });
         const imageBlob = response.data;
         const imageObjectURL = URL.createObjectURL(imageBlob);
         setImageUrl(imageObjectURL);

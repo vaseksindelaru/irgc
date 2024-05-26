@@ -1,10 +1,12 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, send_from_directory
 from flask_cors import CORS
 import ccxt
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import io
+import os
+import tempfile
 
 app = Flask(__name__)
 CORS(app)  # Habilitar CORS para todas las rutas
@@ -73,12 +75,17 @@ def plot():
     plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=1))
     plt.gcf().autofmt_xdate()
 
-    # Guardar el gráfico en un objeto BytesIO y enviarlo como respuesta
-    img = io.BytesIO()
-    plt.savefig(img, format='png')
-    img.seek(0)
-    plt.close()
-    return send_file(img, mimetype='image/png')
+    # Guardar el gráfico en un archivo temporal
+    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp_file:
+        plt.savefig(tmp_file, format='png')
+
+    # Enviar el archivo temporal como respuesta
+    return send_file(tmp_file.name, mimetype='image/png')
+
+# Manejar la solicitud de favicon.ico
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 if __name__ == '__main__':
     app.run(debug=True)
