@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { query } from '@/libs/mysql'; // Ajusta la ruta según tu estructura de archivos
+import { query } from '@/libs/mysql';
 
 export async function GET() {
   
