@@ -61,7 +61,7 @@ function CrearTorneoComponent () {
         <div>
         <form ref={form} className="max-w-md mx-auto p-6 bg-gray-700 shadow-md rounded" onSubmit={handleSubmit}>
       <div className="mb-4">
-        <label className="block text-gray-200 text-sm font-bold mb-2" htmlFor="tema">
+        <label className="block text-gray-300 text-sm mb-2" htmlFor="tema">
           Tema
         </label>
         <input
@@ -75,7 +75,7 @@ function CrearTorneoComponent () {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-200 text-sm font-bold mb-2" htmlFor="subtema">
+        <label className="block text-gray-300 text-sm mb-2" htmlFor="subtema">
           Subtema
         </label>
         <input
@@ -89,7 +89,7 @@ function CrearTorneoComponent () {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-200 text-sm font-bold mb-2" htmlFor="descripcion">
+        <label className="block text-gray-300 text-sm mb-2" htmlFor="descripcion">
           Descripción
         </label>
         <textarea
@@ -108,7 +108,7 @@ function CrearTorneoComponent () {
           className="bg-blue-500 hover:bg-blue-700 
           text-white font-bold py-2 px-4 rounded 
           focus:outline-none focus:shadow-outline">
-            {params.id ? "crear" : "actualisar"}
+            {params.id ? "actualisar" : "crear"}
         </button>
        
       </div>

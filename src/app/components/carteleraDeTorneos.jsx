@@ -18,13 +18,13 @@ return (
           <Link key={torneo.tarea_id} className="border hover:bg-gray-500 p-4 rounded-lg shadow" href={ `/pages/cartelera/${torneo.tarea_id}`}>
           <div className="mb-2" >
               
-              <div className="text-xl font-bold text-gray-300">{torneo.tarea_id}</div>
+              <div className="text-l font-bold text-gray-300">{torneo.tarea_id}</div>
             </div>
             <div className="mb-2" >
             <div className="text-xl font-bold text-gray-300">{torneo.tema}</div>
             </div>
             <div className="mb-2">
-              <div className="text-lg font-semibold text-gray-500">{torneo.subtema}</div>
+              <div className="text-lg font-semibold text-gray-400">{torneo.subtema}</div>
             </div>
             <div>
               <div className="text-base text-white">{torneo.descripcion}</div>
