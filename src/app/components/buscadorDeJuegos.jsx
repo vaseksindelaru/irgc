@@ -32,11 +32,12 @@ const BuscarJuego = ({ juegos }) => {
         Buscar
       </button>
       <div className="mt-4">
-        {resultados.length > 0 ? (
-          <ul>
+      {resultados.length > 0 ? (
+          <ul className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {resultados.map((juego) => (
-              <li key={juego.id} className="mb-2">
-                {juego.title}
+              <li key={juego.id} className="border p-4 rounded shadow-md flex flex-col items-center">
+                <img src={juego.thumbnail} alt={juego.title} className="w-full h-auto mb-2"/>
+                <p>{juego.title}</p>
               </li>
             ))}
           </ul>
