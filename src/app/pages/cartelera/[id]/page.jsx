@@ -21,8 +21,7 @@ async function TorneoPage({params}) {
       <div className="text-base text-white">{torneo.descripcion}</div>
     </div>
    <Buttons torneoId={torneo.tarea_id}/>
-   
-  </div>
+   </div>
   )
 }
 

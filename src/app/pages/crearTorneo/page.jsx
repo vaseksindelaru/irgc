@@ -1,13 +1,7 @@
 import CrearTorneoComponent from "@/app/components/crearTorneoComponent";
 
-
-
-
-
 const CrearTorneo = () => {
-
-
-  return (
+return (
    <CrearTorneoComponent/>
   );
 };

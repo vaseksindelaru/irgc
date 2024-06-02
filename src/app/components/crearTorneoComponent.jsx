@@ -52,12 +52,7 @@ function CrearTorneoComponent () {
     router.refresh()
     form.current.reset()
     router.push('/pages/cartelera')};
-
-   
-
-
-  
-    return(
+ return(
         <div>
         <form ref={form} className="max-w-md mx-auto p-6 bg-gray-700 shadow-md rounded" onSubmit={handleSubmit}>
       <div className="mb-4">
