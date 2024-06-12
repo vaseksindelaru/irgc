@@ -2,8 +2,7 @@ from flask import Flask, send_file, send_from_directory
 from flask_cors import CORS
 import ccxt
 import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
+import mplfinance as mpf
 import io
 import os
 import tempfile
@@ -24,7 +23,7 @@ def plot():
     exchange = ccxt.binance()
     symbol = 'BTC/USDT'
     timeframe = '5m'
-    ohlcv = exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=1000)
+    ohlcv = exchange.fetch_ohlcv(symbol, timeframe=timeframe, limit=200)
     df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
     df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
     df.set_index('timestamp', inplace=True)
@@ -57,27 +56,16 @@ def plot():
     prob_up = (analysis_df['Direction Before'] == analysis_df['Direction After']).mean()
     prob_down = 1 - prob_up
 
-    plt.figure(figsize=(14,7))
-    plt.plot(df.index, df['close'], label='Close Price', color='blue')
-    plt.scatter(analysis_df[analysis_df['Direction After'] == 'Up']['Signal Time'], 
-                df.loc[analysis_df[analysis_df['Direction After'] == 'Up']['Signal Time'], 'close'], 
-                color='green', label='Signal - Up', marker='^', alpha=1)
-    plt.scatter(analysis_df[analysis_df['Direction After'] == 'Down']['Signal Time'], 
-                df.loc[analysis_df[analysis_df['Direction After'] == 'Down']['Signal Time'], 'close'], 
-                color='red', label='Signal - Down', marker='v', alpha=1)
-
-    plt.xlabel('Date')
-    plt.ylabel('Price')
-    plt.title('Trading Signals and Price Direction Analysis')
-    plt.legend()
-    plt.grid(True)
-    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
-    plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=5))
-    plt.gcf().autofmt_xdate()
-
+    # Graficar velas japonesas con volumen en la parte inferior
+    mc = mpf.make_marketcolors(up='g', down='r', volume='in')
+    s = mpf.make_mpf_style(marketcolors=mc)
+    
+    # Crear el gráfico con mplfinance
+    fig, axlist = mpf.plot(df, type='candle', volume=True, style=s, returnfig=True)
+    
     # Guardar el gráfico en un archivo temporal
     with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp_file:
-        plt.savefig(tmp_file, format='png')
+        fig.savefig(tmp_file, format='png')
 
     # Enviar el archivo temporal como respuesta
     return send_file(tmp_file.name, mimetype='image/png')

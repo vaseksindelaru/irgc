@@ -16,7 +16,7 @@ async function CarteleraDeTorneos() {
 const torneos = await loadCarteleraDeTorneos()
 console.log(torneos)
 const juegos = await loadJuego()
-console.log(juegos)
+//console.log(juegos)
 return (
     <div className="max-w-7xl mx-auto p-6 shadow-md rounded-lg">
       <div>
