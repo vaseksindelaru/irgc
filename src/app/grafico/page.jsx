@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <div>
       <h1>Trading Signals and Price Direction Analysis</h1>
-      <div className='p-10'>{imageUrl && <img src={imageUrl} alt="Trading Signals Analysis" />}</div>
+      <div className='p-5'>{imageUrl && <img src={imageUrl} alt="Trading Signals Analysis" />}</div>
     </div>
   );
 };
